@@ -53,10 +53,10 @@ hindRight->Set(value);
 hindLeft->Set(value);
 }
 void MotorControl::Right(float value) {
-frontRight->Set(-value);
-frontLeft->Set(-value);
-hindRight->Set(value);
-hindLeft->Set(value);
+frontRight->Set(value);
+frontLeft->Set(value);
+hindRight->Set(-value);
+hindLeft->Set(-value);
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
