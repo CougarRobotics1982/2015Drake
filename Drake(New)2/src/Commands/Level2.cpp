@@ -27,7 +27,14 @@ void Level2::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Level2::Execute() {
-	Robot::motorControl->hindRight->Set(.5);
+	if (Robot::sensors->encoder->Get() >= 500 ) {
+	Robot::motorControl->hindRight->Set(-.5);
+	neg = true;
+	} else {
+		Robot::motorControl->hindRight->Set(.5);
+	neg = false;
+	}
+
 	printf("%i\n",Robot::sensors->encoder->Get());
 }
 
@@ -35,9 +42,15 @@ void Level2::Execute() {
 bool Level2::IsFinished() {
 	int z;
 	z = Robot::sensors->encoder->Get();
-	bool x;
-	if (z <= 600 and z >= 400) {
-		x = true;
+	bool x = false;
+	if (neg == true) {
+		if (z <= 500) {
+			x = true;
+		}
+	} else if (neg == false) {
+		if (z >= 500) {
+			x = true;
+		}
 	}
 	return x;
 }

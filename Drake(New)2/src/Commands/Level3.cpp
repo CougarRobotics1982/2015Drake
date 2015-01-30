@@ -27,10 +27,13 @@ void Level3::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Level3::Execute() {
-	if (Robot::sensors->encoder->Get() >= 1100 ) {
-	Robot::motorControl->hindRight->Set(-.5);
+	neg = false;
+	if (Robot::sensors->encoder->Get() >= 1000 ) {
+		Robot::motorControl->hindRight->Set(-.5);
+		neg = true;
 	} else {
 		Robot::motorControl->hindRight->Set(.5);
+
 	}
 
 	printf("%i\n",Robot::sensors->encoder->Get());
@@ -40,9 +43,15 @@ void Level3::Execute() {
 bool Level3::IsFinished() {
 	int z;
 	z = Robot::sensors->encoder->Get();
-	bool x;
-	if (z <= 900 and z >= 1100) {
-		x = true;
+	bool x = false;
+	if (neg == true) {
+		if (z <= 1000) {
+			x = true;
+		}
+	} else if (neg == false) {
+		if (z >= 1000) {
+			x = true;
+		}
 	}
 	return x;
 }
