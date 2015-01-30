@@ -29,12 +29,12 @@ void MotorRun::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void MotorRun::Execute() {
-	if (Robot::oi->getXbox()->GetX() != .1 and //dead zone if statement
-		Robot::oi->getXbox()->GetZ() != .1 and
-		Robot::oi->getXbox()->GetY() != .1) {
-	RobotMap::motorControlRobotDrive->MecanumDrive_Cartesian(Robot::oi->getXbox()->GetX(),
-															 Robot::oi->getXbox()->GetZ(),
-															 Robot::oi->getXbox()->GetY());
+	if (Robot::oi->getJoystick()->GetX() != .1 and //dead zone if statement
+		Robot::oi->getJoystick()->GetZ() != .1 and
+		Robot::oi->getJoystick()->GetY() != .1) {
+	RobotMap::motorControlRobotDrive->MecanumDrive_Cartesian(Robot::oi->getJoystick()->GetX(),
+															 Robot::oi->getJoystick()->GetZ(),
+															 Robot::oi->getJoystick()->GetY());
 	} else {}
 }
 

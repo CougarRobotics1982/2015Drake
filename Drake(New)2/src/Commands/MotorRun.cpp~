@@ -22,12 +22,20 @@ MotorRun::MotorRun() {
 
 // Called just before this Command runs the first time
 void MotorRun::Initialize() {
+	Robot::motorControl->InitMecanum(1,4,3,2);
 	
+
 }
 
 // Called repeatedly when this Command is scheduled to run
 void MotorRun::Execute() {
-	Robot::motorControl->Forward(Robot::oi->getXbox()->GetY());
+	if (Robot::oi->getJoystick()->GetX() != .1 and //dead zone if statement
+		Robot::oi->getJoystick()->GetZ() != .1 and
+		Robot::oi->getJoystick()->GetY() != .1) {
+	RobotMap::motorControlRobotDrive->MecanumDrive_Cartesian(Robot::oi->getJoystick()->GetX(),
+															 Robot::oi->getJoystick()->GetZ(),
+															 Robot::oi->getJoystick()->GetY());
+	} else {}
 }
 
 // Make this return true when this Command no longer needs to run execute()
